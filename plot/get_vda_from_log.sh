@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# TAGS: vda_table
 # This helper script is used to format the output of VD.A from produce_vda_table.py so that it can be copy and pasted directly to the Latex file.
 # The input is the output log from the plot.R (or wrapped by generate_bug_plot_data.sh). 
 # A small caveat is that the plot.R must be invoked while also including the table of conclusions.

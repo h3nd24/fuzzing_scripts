@@ -3,6 +3,8 @@ import sys
 import argparse
 import numpy as np
 
+# TAGS: coefficient_of_variation
+
 parser = argparse.ArgumentParser( \
 	description="calculate Coefficient of Variation. This is deprecated since we don't use it anymore in the paper")
 parser.add_argument('-i', '--input', type=str, help='Takes the output of calculate_AUC.R, e.g., \"plot_data_stats/pdf_18h_bug_crashes_cmin_AUC\"')

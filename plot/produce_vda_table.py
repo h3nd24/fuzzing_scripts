@@ -3,6 +3,8 @@ import csv
 import argparse
 import sys 
 
+# TAGS: vda_table
+
 parser = argparse.ArgumentParser( description="Produce vda values for result table in the paper")
 parser.add_argument('-i', '--input', type=str, help='result file')
 parser.add_argument(      '--base', help="reference point for the VDA")

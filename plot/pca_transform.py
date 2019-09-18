@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+# TAGS: corpus_distance
 from __future__ import print_function
 import time
 import sys

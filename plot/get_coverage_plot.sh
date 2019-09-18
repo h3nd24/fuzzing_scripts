@@ -2,6 +2,7 @@
 set -x
 set -e 
 
+# TAGS: coverage_over_time
 # Wrapper script that produces plots for coverage information on the experiments result
 PROG=${1}
 CAP_TRIALS=30

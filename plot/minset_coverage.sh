@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# TAGS: minset_setup
 # Helper script to setup the files for the input of MINSET (Rebert et. al.'s)program.
 # PROG is the target, e.g., pdf.
 # DIR is the input bitvectors directory.

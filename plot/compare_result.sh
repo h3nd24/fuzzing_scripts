@@ -1,5 +1,6 @@
 #!/bin/bash
 # Simple script to compare the number of bugs (result of time_to_find.py, default to "_AUC" files)
+# TAGS=compare_result
 
 PROG=${1}
 INFIX=${2}

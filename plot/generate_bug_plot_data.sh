@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# TAGS: bugs_over_time
+
 set -x
 set -e 
 PROG=${1} # e.g., pdf

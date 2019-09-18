@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# TAGS: bugs_over_time
 # take the filename of the actual crashes and a bug report,
 # this script will fill in the rest of the crashes with no bug ID ("")
 

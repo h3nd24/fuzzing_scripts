@@ -1,5 +1,8 @@
 #!/usr/bin/Rscript
 #!/usr/bin/env Rscript 
+
+# TAGS: bugs_over_time, coverage_over_time
+
 library(boot)
 source(file="plot_utils.R")
 

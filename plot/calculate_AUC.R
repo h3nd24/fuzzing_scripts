@@ -1,5 +1,6 @@
 library(optparse)
 
+# TAGS: coverage_over_time, bugs_over_time 
 # calculate the AUC and the total bugs for each trial
 
 option_list <- list(

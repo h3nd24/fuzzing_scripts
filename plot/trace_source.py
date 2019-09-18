@@ -5,7 +5,9 @@ import glob
 import time
 import sys
 
-parser = argparse.ArgumentParser( description="trace AFL crashes back to their sources")
+# TAGS: trace_source
+
+parser = argparse.ArgumentParser( description="trace AFL crashes back to their sources (Deprecated)")
 parser.add_argument('dir', metavar='Dir', type=str, nargs=1, help='Fuzzing run directory, e.g., \"pdf_18h/cmin_1\"') 
 parser.add_argument('-o', '--output', help="output file")
 args = parser.parse_args()

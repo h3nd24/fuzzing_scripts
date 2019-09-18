@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# TAGS: bug_count
 # this script takes the triage result (CSV file) as an input and output the count of distinct bugs
 
 FILE=${1}

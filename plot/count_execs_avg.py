@@ -8,6 +8,8 @@ import numpy as np
 import sys
 import time
 
+# TAGS: seed_stats
+
 parser = argparse.ArgumentParser(description="Getting average from the seed stats (execs and paths), i.e., the output of \"count_execs.py\" for all trial. The input format will be of the form \"<prefix>_<experiment>_<n>.csv\" where 1 <= n <= <max_trial>")
 parser.add_argument('-e', '--experiment', help="corpus treatment / distillation, e.g., cmin")
 parser.add_argument('-i', '--input', metavar='Dir', type=str, help='where the the outputs from \"count_execs.py\" are located', default=".")

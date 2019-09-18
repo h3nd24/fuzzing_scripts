@@ -6,6 +6,8 @@ import time
 import sys
 import csv 
 
+# TAGS: seed_stats
+
 def getData(file_name):
         fuzzer_info = []
         with open(file_name[0], 'rb') as csvfile:

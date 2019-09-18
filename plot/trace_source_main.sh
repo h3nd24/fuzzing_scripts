@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# TAGS: trace_source
+# (Deprecated) Script to setup the tracing crashes back to its source 
 #set -x
 PROG=${1}                 # e.g., "sox"
 ALGS=${2}                 # e.g., "full cmin minset moonshine_size empty random"

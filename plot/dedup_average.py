@@ -10,6 +10,8 @@ from scipy import stats
 import sys
 import time
 
+# TAGS: bugs_over_time
+
 parser = argparse.ArgumentParser(description="Getting average from deduplicated data, either stack-hash deduplicated or bug triaging. In practice, this script takes the output from either time_to_find.py or deduplicated.py as input.")
 parser.add_argument('-e', '--experiment', help="corpus treatment / distillation, e.g., \"cmin\"")
 parser.add_argument('-i', '--input', metavar='Dir', type=str, help='where the plot data is located, e.g., \"dedup_plot_data\"', default=".")

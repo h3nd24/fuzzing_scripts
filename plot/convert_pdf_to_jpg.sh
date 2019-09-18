@@ -1,4 +1,5 @@
 #!/bin/bash
+# TAGS: general, corpus_distance
 
 INPUT=${1}
 OUTPUT=${2}

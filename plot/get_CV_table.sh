@@ -1,4 +1,5 @@
 #!/bin/bash
+# TAGS: coefficient_of_variation
 # This is a helper script that calls calculate_CV.py.
 # Mainly used to get the coefficient of variation in the Latex table format so I can copy and paste directly into the .tex file.
 # Unfortunately this script is now deprecated since we do not use the coefficient of variation anymore in the paper.

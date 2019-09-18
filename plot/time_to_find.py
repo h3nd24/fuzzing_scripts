@@ -5,6 +5,8 @@ import glob
 import argparse
 from Queue import PriorityQueue
 
+# TAGS: bugs_over_time
+
 def getData(file_name):
 	fuzzer_info = []
 	with open(file_name, 'rb') as csvfile:

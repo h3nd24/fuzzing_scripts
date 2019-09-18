@@ -5,6 +5,8 @@ import glob
 import argparse
 from Queue import PriorityQueue
 
+# TAGS: bugs_over_time
+
 parser = argparse.ArgumentParser( \
 	description="Transform CSV of bug IDs to file (to be processed further by \"time_to_find.py\"). The output files are of the form \"id:X\" where X is six-digits zero-padded ID corresponding to the crashes IDs.")
 parser.add_argument('-i', '--input', type=str, help='input CSV file')

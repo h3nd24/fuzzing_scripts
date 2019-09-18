@@ -2,7 +2,7 @@
 #!/usr/bin/env Rscript 
 
 # This is the main interface for the script to plot the seed statistics.
-# The data will be of the form <inputprefix>_<alg>_<n> where 1 <= n <= 30 and <alg> in <algnames>
+# The data will be of the form <inputprefix>_<alg>_<n> where 1 <= n <= 30 and <alg> in <algnames>, and the data is taken from the output of time_to_find.py
  
 library(optparse)
 library(ggplot2)

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# TAGS: speedup_plot
+# Wrapper script to call plot_bug_stats.R
 PROG=${1}
 OUTPUT=${2}
 BUGS=""

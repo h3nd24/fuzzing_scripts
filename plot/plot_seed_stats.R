@@ -1,6 +1,7 @@
 #!/usr/bin/Rscript
 #!/usr/bin/env Rscript 
 
+# TAGS: seed_stats
 # Script to plot the aggregate seed statistics acrosss the distillation techniques.
 # This script is deprecated in favor of plot_seed_stats_grouped.R which shows individual seed statistics.
 # Takes the output of "count_execs_avg.py" as input.

@@ -1,5 +1,7 @@
 #!/usr/bin/Rscript
 #!/usr/bin/env Rscript 
+
+# TAGS: seed_stats
 # Script to plot the seed statistics (executions allocated) per distillation technique. 
 # The seeds are sorted by the number of executions allocated.
 library(optparse)

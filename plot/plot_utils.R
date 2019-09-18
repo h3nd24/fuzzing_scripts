@@ -2,6 +2,8 @@
 #!/usr/bin/env Rscript 
 #library(methods)
 #library(stringr)
+
+# TAGS: bugs_over_time, coverage_over_time, seed_stats, corpus_distance
 library(effsize)
 library(optparse)
 library(grid)

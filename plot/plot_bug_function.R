@@ -3,6 +3,7 @@ library(gridExtra)
 library(EnvStats)
 library(boot)
 
+# TAGS: speedup_plot
 # Various trials at plotting speed to find bug.
 # We ended up with the plotting_7, so the other plotting functions may not work properly anymore / it requires minor tweaks
 

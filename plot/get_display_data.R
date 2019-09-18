@@ -1,6 +1,8 @@
 #!/usr/bin/Rscript
 #!/usr/bin/env Rscript 
 
+# TAGS: bugs_over_time, coverage_over_time
+
 #library(methods)
 #library(stringr)
 library(optparse)

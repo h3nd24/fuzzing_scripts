@@ -10,6 +10,8 @@ from scipy import stats
 import sys
 import time
 
+# TAGS: coverage_over_time, raw_crashes_over_time
+
 parser = argparse.ArgumentParser(description="Produce plot data for coverage and crashes vs. executions. Currently we disable the one for raw crashes because we do not use it for the paper.")
 parser.add_argument('-i', '--input', metavar='Dir', type=str, help='Fuzzing run directory', default="")
 parser.add_argument('-o', '--output', help="plot data prefix", default="plot_data")

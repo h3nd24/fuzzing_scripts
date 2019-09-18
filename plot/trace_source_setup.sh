@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# TAGS: trace_source
+# setup the crashes that is triaged to be of a particular bug (Deprecated)
 #set -x
 PROG=${1}        # e.g., "pdf"
 ALG=${2}         # e.g., "cmin"

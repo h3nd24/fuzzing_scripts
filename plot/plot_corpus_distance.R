@@ -3,6 +3,7 @@
 library(boot)
 source(file="plot_utils.R")
 
+# TAGS: corpus_distance
 # Plot the corpus distance, takes the data points from the result of pca_transform.py
 
 option_list <- list(

@@ -1,6 +1,7 @@
 #!/usr/bin/Rscript
 #!/usr/bin/env Rscript 
 
+# TAGS: bugs_over_time, coverage_over_time, plot_legend
 # Script to plot the overall legend for bugs overtime plots (result of "generate_bug_plot_data.sh").
 
 source(file="plot_utils.R")

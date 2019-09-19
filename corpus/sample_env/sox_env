@@ -1,0 +1,16 @@
+# Sample environment variables for running SoX (MP3) experiment
+
+PROG=sox
+BASE_PROG=sox
+PROG_PREFIX="--single-threaded"
+PROG_POSTFIX="-b 16 -t aiff /dev/null channels 1 rate 16k fade 3 norm"
+FILE_EXTENSION=.mp3
+LIMIT_MB=800
+TIME_LIMIT=
+EXTRA_LIBS=~/llvm_asan/sox_llvm_asan/i386-linux-gnu
+
+# just leave these here for convenience
+PROG_BIN=~/llvm_asan/${PROG}_llvm_asan/afl-build/bin/${BASE_PROG}
+PROG_LIB=~/llvm_asan/${PROG}_llvm_asan/afl-build/lib
+if [ ! -z "${EXTRA_LIBS}" ]; then PROG_LIB=${PROG_LIB}:${EXTRA_LIBS}; fi
+

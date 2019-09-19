@@ -8,7 +8,6 @@ seed_stats
 bug_count
 coefficient_of_variation
 vda_table
-minset_setup
 speedup_plot
 plot_legend
 trace_source

@@ -2,6 +2,7 @@
 
 # Script to check the timeout of a particular seed.
 # Works by registering the timing of individual runs and then average them (25x)
+# The output of this script is used to get the time weight of each seed.
 
 #set -x
 #set -e

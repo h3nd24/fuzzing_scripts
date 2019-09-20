@@ -1,0 +1,6 @@
+# TAGS: libtiff
+# Debugging bug B. We check when the count of transfer functions does not match between t2p and input TIFF.
+set breakpoint pending on
+br tiff2pdf.c:5486 if t2p->tiff_transferfunctioncount != (input->tif_dir->td_samplesperpixel - input->tif_dir->td_extrasamples)
+run
+printf "transferfunctions: %d != %d\n", t2p->tiff_transferfunctioncount, (input->tif_dir->td_samplesperpixel - input->tif_dir->td_extrasamples)

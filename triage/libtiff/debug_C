@@ -1,0 +1,7 @@
+# TAGS: libtiff
+# Debugging bug C. We check that the allocated size of input buffer matches the output buffer
+set breakpoint pending on
+br TIFFWriteEncodedStrip
+run
+printf "PLANARCONFIG : %d != %d\n", malloc_usable_size(data), cc
+

@@ -1,0 +1,5 @@
+# TAGS: libtiff
+# Debugging bug A. We check if the integer overflow happened on TIFF_Realloc
+set breakpoint pending on
+br tif_aux.c:73 if nmemb * elem_size < nmemb || nmemb < 0
+run

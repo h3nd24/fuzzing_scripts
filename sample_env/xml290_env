@@ -1,0 +1,15 @@
+# Sample environment variables for running libxml (xmllint) experiment
+
+PROG=xml290
+BASE_PROG=xmllint
+PROG_PREFIX="-o /dev/null"
+PROG_POSTFIX=
+FILE_EXTENSION=.xml
+LIMIT_MB=600
+TIME_LIMIT=
+EXTRA_LIBS=
+
+# just leave these here for convenience
+PROG_BIN=~/llvm_asan/${PROG}_llvm_asan/afl-build/bin/${BASE_PROG}
+PROG_LIB=~/llvm_asan/${PROG}_llvm_asan/afl-build/lib
+if [ ! -z "${EXTRA_LIBS}" ]; then PROG_LIB=${PROG_LIB}:${EXTRA_LIBS}; fi

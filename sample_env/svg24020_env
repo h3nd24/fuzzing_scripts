@@ -1,0 +1,14 @@
+# Sample environment variables for running librsvg experiment
+
+PROG=svg24020
+BASE_PROG=rsvg-convert
+PROG_PREFIX="-o /dev/null"
+PROG_POSTFIX=
+FILE_EXTENSION=.svg
+LIMIT_MB=800
+TIME_LIMIT=3500
+EXTRA_LIBS=~/llvm_asan/${PROG}_llvm_asan/i386-linux-gnu
+# just leave these here for convenience
+PROG_BIN=~/llvm_asan/${PROG}_llvm_asan/afl-build/bin/${BASE_PROG}
+PROG_LIB=~/llvm_asan/${PROG}_llvm_asan/afl-build/lib
+if [ ! -z "${EXTRA_LIBS}" ]; then PROG_LIB=${PROG_LIB}:${EXTRA_LIBS}; fi

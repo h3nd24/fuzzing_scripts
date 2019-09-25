@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# TAGS: libtiff, libxml, FreeType
 #set -x
 # Script to run a particular crash in the "similar" context as during the fuzzing process.
 # This is actually used during triage to check if we can generate a core dump from executing the crashing seed.

@@ -48,7 +48,7 @@ for t in ${T}; do
           else echo -n "X"; fi
 	# failed assertions 
 	elif [ ! -z "$(grep "Assertion" crash_log)" ]; then 
-          if [ ! -z "$(grep -e "lsx_is_power_of_2(len)" -e "rate.c:303: void rate_init" crash_log)" ]; then echo -n "X"; 
+          if [ ! -z "$(grep -e "lsx_is_power_of_2(len)" -e "rate.c:303: void rate_init" crash_log)" ]; then echo -n ""; 
           else echo -n"X"; fi
         else echo -n "X";
 	fi	

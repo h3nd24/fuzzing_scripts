@@ -1,4 +1,4 @@
-The scripts contained in this archive are used during the experiments, corpus preparation, and 
+The scripts contained in this archive are used during the experiments, corpus preparation, triage, and 
 plotting figures from experiment data.
 
 ###################################################################################################
@@ -38,8 +38,31 @@ combine\_time\_size.sh <prefix to the output of get\_size.sh and check\_timeout.
 get\_moonlight\_weight.sh <program> <infix to the output of get\_size.sh and check\_timeout.sh>
 moonlight\_call.sh <program> [ "size" | "time" | "" ]
 
+To produce coverage for minset, we reuse the bitvectors produced by MoonBeam, and create the archive
+with necessary information with "minset\_coverage.sh".
 
+minset\_coverage.sh <program> <bitvectors> <output directory>
 
+There are other scripts that are not directly used to produce the corpora in the MoonLight paper.
+check\_weight.sh is used to extract information about the weight in the MoonLight solution.
+sort\_coverage.sh and copy\_sorted\_corpus is used to get the (reverse) sorted corpora based on coverage.
+
+check\_weight.sh <solution file> <time weight> <file size weight>, the weights are the result of
+  get\_moonlight\_weight.sh
+sort\_coverage.sh <corpus directory>
+copy\_sorted\_corpus.sh <source directory> <target directory> <result of sort\_coverage.sh>
+
+In summary, the procedure on getting the corpora in the MoonLight paper:
+* Full          : none
+* CMIN          : cmin.sh <Full>
+* Minset        : showmaps.sh <Full> -> MoonBeam -> minset\_coverage.sh -> minset -> copy the files from Full
+* ML-U          : showmaps.sh <Full> -> MoonBeam -> MoonLight -> move\_solution.py -> moonlight\_call.sh
+* ML-S and ML-T : showmaps.sh <Full> -> MoonBeam -> check\_timeout.sh -> get\_size.sh -> 
+                  combine\_time\_size.sh -> get\_moonlight\_weight.sh -> moonlight\_call.sh
+* Random        : create\_random.sh <Full>
+
+If you want to get the (reverse) sorted based on coverage, use sort\_coverage.sh -> copy\_sorted\_corpus.sh
+from the AFL tuples of the seeds in the above corpora.
 
 ###################################################################################################
 #                                     Configuration Files                                         #
@@ -56,6 +79,37 @@ memory limit, timeout, and the location of extra libraries needed.
 These scripts are used as a trivial fuzzing experiment manager. fuzz.sh is the script which will
 load configuration file and run a fuzzing experiment accordingly. run.sh invokes a number fuzz.sh 
 (limit permitting), and pause when the maximum number of concurrent fuzzing experiment is hit.
+
+run.sh <priority> <distillation techniques> <program> <starting trial number>
+fuzz.sh <program> <distillation technique> <trial number> <fuzzer number>
+
+The other scripts are used for archiving, cleaning the queue, and check if the fuzzers are instantiated.
+Cleaning the queue is achieved by replacing the files in the queue with empty files.
+Checking the how many fuzzers are instantiated is achieved by counting how many "fuzzer\_stats" exist
+in the fuzzing output directory.
+
+archive.sh <program> <distillation techniques> <minimum trial number> <maximum trial number>
+clean\_queue.sh <distillation technique> <trial number>
+check\_fuzzers\_sound.sh <distillation techniques> <minimum trial number> <maximum trial number>
+
+###################################################################################################
+#                                            Triage                                               #
+###################################################################################################
+
+The scripts for triaging specific targets are contained in their respective subdirectories.
+There are three broad vein on how to triage the crashes found in the fuzzing experiment for MoonLight.
+* Get the patch for a binary and then check if it does not produce the crash anymore, e.g., FreeType and libxml.
+* If the bug is specific enough, then we can use the output of ASAN to distinguish bugs, e.g., SoX on both MP3 and WAV.
+* Using breakpoint on GDB to tell if a specific situation which will lead to bug is triggered, mainly on libtiff.
+
+Most of the scripts uses the configuration files and get\_core.sh, and the triage scripts are invoked in the same way.
+"get\_core.sh" is a script that is invoked by the triagin script when testing whether a particular 
+crash is triggered. 
+
+get\_core.sh <program> <experiment directory> <fuzzer number> <crash id>
+<program>\_triage.sh <distillation techniques> <minimum trial> <maximum trial> > <program>\_triage\_result
+
+Since libtiff is using GDB, there are additional GDB scripts accompanying the script to triage libtiff.
 
 ###################################################################################################
 #                                             Plot                                                #

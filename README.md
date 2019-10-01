@@ -55,7 +55,7 @@ sort\_coverage.sh and copy\_sorted\_corpus is used to get the (reverse) sorted c
 check_weight.sh <solution file> <time weight> <file size weight>, the weights are the result of
   get_moonlight_weight.sh
 sort_coverage.sh <corpus directory>
-copy_sorted\_corpus.sh <source directory> <target directory> <result of sort_coverage.sh>
+copy_sorted_corpus.sh <source directory> <target directory> <result of sort_coverage.sh>
 ```
 
 In summary, the procedure on getting the corpora in the MoonLight paper:

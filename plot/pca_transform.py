@@ -19,12 +19,10 @@ parser.add_argument(      '--inputprefix', default="sox", type=str, help='Prefix
 parser.add_argument(      '--inputpostfix', default="tuples", type=str, help='Postfix for corpus directories')
 parser.add_argument(      '--algs', default="full cmin moonshine moonshine_size moonshine_time minset", type=str, help="Corpus distillation techniques")
 parser.add_argument(      '--pca-operators', default="pca_operators_all.pkl", help="Serialized file of PCA operators (output of pca.py)")
-parser.add_argument('-o', '--output', default="sox_corpus_distance.pdf", help="output file")
 parser.add_argument(      '--outputprefix', default="sox_corpus_distance", help="prefix for intermediate output data for further processing by plot_corpus_distance.R")
 args = parser.parse_args()
 print(args)
 cwd = os.getcwd()
-outfile = os.path.join(cwd, args.output)
 pca_file = os.path.join(cwd, args.pca_operators)
 inputprefix = args.inputprefix
 inputpostfix = args.inputpostfix

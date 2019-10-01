@@ -9,7 +9,7 @@ TARGET_DIR=${3}
 FILE_EXTENSION=${4}
 
 mkdir ${TARGET_DIR}
-ln -v ${SOURCE_DIR}/* ${TARGET_DIR}/
+for f in $(ls -1 ${SOURCE_DIR}); do ln -v ${SOURCE_DIR}/${f} ${TARGET_DIR}/; done
 
 echo "Adding empty"
 # There should be only one file in the empty directory, otherwise it does not make any sense.

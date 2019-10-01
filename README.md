@@ -12,8 +12,10 @@ Currently, the location of the configuration files is expected to be in the fold
 
 To obtain the cmin corpus and afl tuples for further processing, execute the following:
 
+```
 cmin.sh <initial corpus> <program>
 showmaps.sh <initial corpus> <program>
+```
 
 where initial corpus is the directory of the initial corpus, and program is the program which will
 be used in fuzzing. It is limited by the configuration files, and currently it can take value from
@@ -30,25 +32,31 @@ information about the execution time for each seed from the log.
 For legacy reason, the actual weight values are first combined using "combine\_time\_size.sh" and then
 formatted correctly to the format expected by MoonLight by using "get\_moonlight\_weight.sh".
 
+```
 get\_size.sh <program>
 check\_timeout.sh <program> <initial corpus>
 combine\_time\_size.sh <prefix to the output of get\_size.sh and check\_timeout.sh>
 get\_moonlight\_weight.sh <program> <infix to the output of get\_size.sh and check\_timeout.sh>
 moonlight\_call.sh <program> [ "size" | "time" | "" ]
+```
 
 To produce coverage for minset, we reuse the bitvectors produced by MoonBeam, and create the archive
 with necessary information with "minset\_coverage.sh".
 
+```
 minset\_coverage.sh <program> <bitvectors> <output directory>
+```
 
 There are other scripts that are not directly used to produce the corpora in the MoonLight paper.
 check\_weight.sh is used to extract information about the weight in the MoonLight solution.
 sort\_coverage.sh and copy\_sorted\_corpus is used to get the (reverse) sorted corpora based on coverage.
 
+```
 check\_weight.sh <solution file> <time weight> <file size weight>, the weights are the result of
   get\_moonlight\_weight.sh
 sort\_coverage.sh <corpus directory>
 copy\_sorted\_corpus.sh <source directory> <target directory> <result of sort\_coverage.sh>
+```
 
 In summary, the procedure on getting the corpora in the MoonLight paper:
 * Full          : none
@@ -67,8 +75,10 @@ We have not used this in the paper yet, but this is a work in progress for addin
 corpus to see if we have performance benefit.
 "add\_empty\_wrapper.sh" is the wrapper to the "add\_empty\_to\_corpus.sh"
 
+```
 add\_empty\_wrapper.sh <program> <file extension>
 add\_empty\_to\_corpus.sh <original empty corpus> <original source corpus> <output directory> <file extension>
+```
 
 #                                     Configuration Files                                         #
 
@@ -82,17 +92,21 @@ These scripts are used as a trivial fuzzing experiment manager. fuzz.sh is the s
 load configuration file and run a fuzzing experiment accordingly. run.sh invokes a number fuzz.sh 
 (limit permitting), and pause when the maximum number of concurrent fuzzing experiment is hit.
 
+```
 run.sh <priority> <distillation techniques> <program> <starting trial number>
 fuzz.sh <program> <distillation technique> <trial number> <fuzzer number>
+```
 
 The other scripts are used for archiving, cleaning the queue, and check if the fuzzers are instantiated.
 Cleaning the queue is achieved by replacing the files in the queue with empty files.
 Checking the how many fuzzers are instantiated is achieved by counting how many "fuzzer\_stats" exist
 in the fuzzing output directory.
 
+```
 archive.sh <program> <distillation techniques> <minimum trial number> <maximum trial number>
 clean\_queue.sh <distillation technique> <trial number>
 check\_fuzzers\_sound.sh <distillation techniques> <minimum trial number> <maximum trial number>
+```
 
 #                                            Triage                                               #
 
@@ -106,8 +120,10 @@ Most of the scripts uses the configuration files and get\_core.sh, and the triag
 "get\_core.sh" is a script that is invoked by the triagin script when testing whether a particular 
 crash is triggered. 
 
+```
 get\_core.sh <program> <experiment directory> <fuzzer number> <crash id>
 <program>\_triage.sh <distillation techniques> <minimum trial> <maximum trial> > <program>\_triage\_result
+```
 
 Since libtiff is using GDB, there are additional GDB scripts accompanying the script to triage libtiff.
 
@@ -120,8 +136,10 @@ average, truncating data points to speed up plotting process, and plot figures.
 There are two scripts that bind these processes together: get\_get\_coverage.plot.sh to plot coverage, 
 and generate\_bug\_plot\_data.sh which plot bugs found overtime.
 
+```
 get\_coverage\_plot.sh <program> <time limit>
 generate\_bug\_plot\_data.sh <program> <time limit>
+```
 
 The time limit is used to cap the time of an experiment in the granularity of hours. The scripts 
 expect a directory of fuzzing experiments (and "triage\_output" subdirectory containing the bug class 
@@ -132,15 +150,19 @@ in the 2D-space (projected using PCA), and plotting the number of executions all
 in the corpus (derivatives from a seed are counted as part of the seed). 
 The speedup plot uses the by-product information produced by the scripts to plot bugs overtime as input.
 
+```
 plot\_bug\_stats\_aux.sh <program> <output>
 Rscript plot\_corpus\_distance.R --algnames <distillation techniques> --inputprefix <prefix to the input files>
   --output <output> --title <plot header>
+```
 
 There is no wrapper script for plotting number of executions allocated for each seed.
 "plot\_seed\_stats\_grouped.R" is the individual version of the "plot\_seed\_stats.R".
 
+```
 Rscript plot\_seed\_stats\_grouped.R --input <input file> --outputprefix <prefix of the output file>
   --title <plot header> --highlight <file containing seed to highlight> --limit <limit on the number of seeds to show> 
+```
 
 With respect to the previous plotting functionalities, these are the related scripts:
 * generate\_plot\_data.py  : combine the coverage of 8 fuzzers from each fuzzing experiment, and also 

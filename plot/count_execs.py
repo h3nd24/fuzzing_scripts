@@ -16,7 +16,7 @@ def getData(file_name):
                         fuzzer_info.append( [ int(row['cur_path']), int(row['paths_total']), int(row['total_execs'])  ] )
         return fuzzer_info
 
-parser = argparse.ArgumentParser( description="Trace AFL crashes back to their sources and gather the statistics, e.g., the executions allocated to each seed. It will be processed further by \"count_execs_avg.py\" and \"plot_seed_stats_grouped.R\"")
+parser = argparse.ArgumentParser( description="Trace AFL queue back to their sources and gather the statistics, e.g., the executions allocated to each seed. It will be processed further by \"count_execs_avg.py\" and \"plot_seed_stats_grouped.R\"")
 parser.add_argument('dir', metavar='Dir', type=str, nargs=1, help='Fuzzing run directory, e.g., \"cmin_1\"')
 parser.add_argument('-o', '--output', help="output file name, which will be consumed by \"count_execs_avg.py\"")
 args = parser.parse_args()

@@ -64,6 +64,14 @@ In summary, the procedure on getting the corpora in the MoonLight paper:
 If you want to get the (reverse) sorted based on coverage, use sort\_coverage.sh -> copy\_sorted\_corpus.sh
 from the AFL tuples of the seeds in the above corpora.
 
+There are scripts to hardlink the original corpora and append empty seed into the corpus.
+We have not used this in the paper yet, but this is a work in progress for adding empty seed to other
+corpus to see if we have performance benefit.
+"add\_empty\_wrapper.sh" is the wrapper to the "add\_empty\_to\_corpus.sh"
+
+add\_empty\_wrapper.sh <program> <file extension>
+add\_empty\_to\_corpus.sh <original empty corpus> <original source corpus> <output directory> <file extension>
+
 ###################################################################################################
 #                                     Configuration Files                                         #
 ###################################################################################################
@@ -115,29 +123,76 @@ Since libtiff is using GDB, there are additional GDB scripts accompanying the sc
 #                                             Plot                                                #
 ###################################################################################################
 
-The scripts are used to aggregate the data from several fuzzers in an experiment, calculate the 
-average, area under curve, truncating data points to speed up plotting process, and plot figures.
-There are two scripts that bind these processes together: get\_plot\_stats.sh to plot coverage and
-raw crashes, and generate\_dedup\_plot\_data.sh which plot stack-hash-deduplicated crashes.
+We have a lot of scripts for various plotting purposes, and we tried to label them using tags in the
+header of each script.
+Some scripts are used to aggregate the data from several fuzzers in an experiment, calculate the 
+average, truncating data points to speed up plotting process, and plot figures.
+There are two scripts that bind these processes together: get\_get\_coverage.plot.sh to plot coverage, 
+and generate\_bug\_plot\_data.sh which plot bugs found overtime.
 
-get\_plot\_stats.sh <program> <max experiments> <time limit>
-generate\_dedup\_plot\_data <program> <time limit>
+get\_coverage\_plot.sh <program> <time limit>
+generate\_bug\_plot\_data.sh <program> <time limit>
 
 The time limit is used to cap the time of an experiment in the granularity of hours. The scripts 
-expect a directory of fuzzing experiments (and stack\_hashes subdirectory containing stack-hash of a 
-corresponding crash) in the format of <program>\_<time\ limit>h, e.g., sox\_18h
+expect a directory of fuzzing experiments (and "triage\_output" subdirectory containing the bug class 
+of a corresponding crash) in the format of <program>\_<time\ limit>h, e.g., sox\_18h.
 
-Individually, the scripts are the following:
-* generate\_plot\_data.py : combine raw data from fuzzing experiments and produce average crashes.
-                          The script also produce the maximum map_size / coverage.
-* deduplicate.py        : combine stack-hash-deduplicated crashes from fuzzing experiments.
-* dedup\_average.py      : produce the average deduplicated crashes (output from deduplicate.py)
-* calculate\_AUC.R       : produce the area under curve for the input data, either it is output from
-                          generate_plot_data.py or dedup_average.py
-* get\_display\_data.R    : truncate the data points that are not visible in the plot to reduce 
-                          plot processing time. Takes input from the output of
-                          generate_plot_data.py or dedup_average.py
-* plot.R                : Main plotting script. Takes input data from the ouput of calculate\_AUC.R
-                          and get_display_data.R.
-* plot\_utils.R          : Some useful functions used in plot.R, mainly to split the plotting script
-                          file so that it is not too big.
+We also have script that plots the speedup plot in the paper, and also the distribution of the corpora
+in the 2D-space (projected using PCA), and plotting the number of executions allocated for each seed
+in the corpus (derivatives from a seed are counted as part of the seed). 
+The speedup plot uses the by-product information produced by the scripts to plot bugs overtime as input.
+
+plot\_bug\_stats\_aux.sh <program> <output>
+Rscript plot\_corpus\_distance.R --algnames <distillation techniques> --inputprefix <prefix to the input files>
+  --output <output> --title <plot header>
+
+There is no wrapper script for plotting number of executions allocated for each seed.
+"plot\_seed\_stats\_grouped.R" is the individual version of the "plot\_seed\_stats.R".
+
+Rscript plot\_seed\_stats\_grouped.R --input <input file> --outputprefix <prefix of the output file>
+  --title <plot header> --highlight <file containing seed to highlight> --limit <limit on the number of seeds to show> 
+
+With respect to the previous plotting functionalities, these are the related scripts:
+* generate\_plot\_data.py  : combine the coverage of 8 fuzzers from each fuzzing experiment, and also 
+                             produce its average overtime over all of the experiments.
+* time\_to\_find.py        : combine triaged bugs from fuzzing experiments.
+* dedup\_average.py        : produce the average bugs over time (output of time\_to\_find.py)
+* calculate\_AUC.R         : produce the area under curve for the input data, either it is output from
+                             generate_plot_data.py or dedup_average.py
+* get\_display\_data.R     : truncate the data points that are not visible in the plot to reduce 
+                             plot processing time. Takes input from the output of
+                             generate_plot_data.py or dedup_average.py
+* plot.R                   : Main plotting script. Takes input data from the ouput of calculate\_AUC.R
+                             and get_display_data.R.
+* plot\_utils.R            : Some useful functions used in plot.R, mainly to split the plotting script
+                             file so that it is not too big and modularity / reusability.
+* pca.py                   : Get the 2D PCA operators from the tuples in a corpus directory (Full).
+* pca\_transform.py        : Project the tuples in a corpus directory according to the operators learned by pca.py
+* plot\_legend.R           : Plot the legend for bug / coverage over time as separate file for modularity 
+                             in the Latex file.
+* csv\_to\_file.py         : This script is used to setup the fuzzing directories with the bugs from
+                             triage result. This is because time\_to\_find.py expect the directory structure
+                             and crash IDs to be the same as the fuzzing experiment.
+* fill\_non\_bugs.sh       : This script pad the triage result with no bug ("") when a particular crash is 
+                             not a bug. This is because sometimes people give me triage result of only
+                             interesting bugs and leave behind the non-bug crashes.
+* count\_execs.py          : Trace the AFL queue back to their sources and gather the statistics, i.e., 
+                             the number of executions allocated to this seed.
+* count\_execs\_avg.py     : Aggregate the result of "count\_execs.py" in the form of mean and standard deviation.
+
+Apart from the previously mentioned scripts, there are various auxilliary scripts:
+* calculate\_CV.py         : Script to get the coefficient of variation on the experiments result. This is
+                             deprecated since we removed the tables from the paper.
+* compare\_result.sh       : Simple script to help me eyeball the output of "calculate\_AUC.R"
+* convert\_pdf\_to\_jpg.sh : Rasterize a vector image (PDF), mainly used for plotting the corpus distance.
+                             We would love to maintain the vector format, but then it will take forever to
+                             display due to the number of data points from full corpus, c'est la vie.
+* get\_bug\_count.sh       : Get the number of trials in the campaign (of a distillation) that hit a particular bug.
+* get\_CV\_table.sh        : The wrapper script to call "calculate\_CV.py" and format it into the Latex format.
+* get\_vda\_from\_log.sh   : Get the VD.A values from the log of executing "plot.R" with "--conclusion" enabled.
+* produce\_vda\_table.sh   : Format the output of "get\_vda\_from\_log.sh" into Latex format.
+* trace\_source\_main.sh   : Wraps the other trace source scripts, used to get an idea of which seed produce
+                             which bugs.
+* trace\_source.py         : Predecessor of "count\_execs.py", mainly this is tracing a crash to its source(s).
+* trace\_source\_setup.sh  : Setup the fuzzing experiments to have crash directories which contains only
+                             a particular bug. 

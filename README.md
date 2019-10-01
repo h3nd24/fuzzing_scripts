@@ -1,9 +1,7 @@
 The scripts contained in this archive are used during the experiments, corpus preparation, triage, and 
 plotting figures from experiment data.
 
-###################################################################################################
 #                                      Corpus Preparation                                         #
-###################################################################################################
 
 There are various script that are involved with the corpus preparation.
 The following two scripts are to ease the calling to manually calling afl-cmin or afl-showmap and 
@@ -72,17 +70,13 @@ corpus to see if we have performance benefit.
 add\_empty\_wrapper.sh <program> <file extension>
 add\_empty\_to\_corpus.sh <original empty corpus> <original source corpus> <output directory> <file extension>
 
-###################################################################################################
 #                                     Configuration Files                                         #
-###################################################################################################
 
 The configuration files, files with suffix "\_env" in env subfolder, contains the parameters which
 will be used during throughout the experiments. Mainly they specify the arguments to the binary,
 memory limit, timeout, and the location of extra libraries needed. 
 
-###################################################################################################
 #                                           Fuzzing                                               #
-###################################################################################################
 
 These scripts are used as a trivial fuzzing experiment manager. fuzz.sh is the script which will
 load configuration file and run a fuzzing experiment accordingly. run.sh invokes a number fuzz.sh 
@@ -100,9 +94,7 @@ archive.sh <program> <distillation techniques> <minimum trial number> <maximum t
 clean\_queue.sh <distillation technique> <trial number>
 check\_fuzzers\_sound.sh <distillation techniques> <minimum trial number> <maximum trial number>
 
-###################################################################################################
 #                                            Triage                                               #
-###################################################################################################
 
 The scripts for triaging specific targets are contained in their respective subdirectories.
 There are three broad vein on how to triage the crashes found in the fuzzing experiment for MoonLight.
@@ -119,9 +111,7 @@ get\_core.sh <program> <experiment directory> <fuzzer number> <crash id>
 
 Since libtiff is using GDB, there are additional GDB scripts accompanying the script to triage libtiff.
 
-###################################################################################################
 #                                             Plot                                                #
-###################################################################################################
 
 We have a lot of scripts for various plotting purposes, and we tried to label them using tags in the
 header of each script.

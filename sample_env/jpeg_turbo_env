@@ -1,0 +1,8 @@
+PROG_BIN=~/llvm_asan/jpeg_turbo/libjpeg-turbo-07-2017-afl
+COV_BIN=~/llvm_asan/jpeg_turbo/libjpeg-turbo-07-2017-libfuzzer
+PROG_LIB=~/llvm_asan/jpeg_turbo
+LIMIT_MB=800
+PROG=jpeg_turbo
+
+export LD_LIBRARY_PATH=${PROG_LIB}
+export ASAN_OPTIONS=abort_on_error=1:detect_leaks=0:symbolize=0:allocator_may_return_null=1

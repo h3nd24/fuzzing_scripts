@@ -1,17 +1,18 @@
 #!/bin/bash
 
-# A script that converts the process raw data into coverage information.
-# The binary needs to be compiled by following the instruction from 
-# https://clang.llvm.org/docs/SourceBasedCodeCoverage.html (-fprofile-instr-generate -fcoverage-mapping).
-
 LLVM_PROFDATA=${LLVM_PROFDATA:-"llvm-profdata"}
 LLVM_COV=${LLVM_COV:-"llvm-cov"}
-ENV_DIR=${ENV_DIR:-"/home/hendrag/llvm_asan"}
+ENV_DIR_DEFAULT=~/llvm_asan
+ENV_DIR=${ENV_DIR:-"${ENV_DIR_DEFAULT}"}
 if [ ! -d "${ENV_DIR}" ]; then echo "${ENV_DIR} does not exist"; exit 1; fi
-if [ ! -e "${LLVM_PROFDATA}" ]; then echo "${LLVM_PROFDATA} does not exist"; exit 1; fi
-if [ ! -e "${LLVM_COV}" ]; then echo "${LLVM_COV} does not exist"; exit 1; fi
+command -v ${LLVM_PROFDATA} >/dev/null 2>&1 || { echo >&2 "I require foo but it's not installed.  Aborting."; exit 1; }
+command -v ${LLVM_COV} >/dev/null 2>&1 || { echo >&2 "I require foo but it's not installed.  Aborting."; exit 1; }
 
 PROG=${1}
+#TYPE=${2}
+#EXP_NUM=${3}
+#FUZZER=${4}
+#ID=${5}
 FILENAME=${2} # the prefix to the profraw
 source ${ENV_DIR}/${PROG}_env
 
